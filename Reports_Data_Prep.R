@@ -23,14 +23,31 @@ summary(reports_data) #Since 12/10/2020 till the date of the analysis 174,667 re
 
 
 
-reports_data_totals <- reports_data %>% 
-  filter(User_ID %in% survey_data$User_ID) %>% 
-  group_by(User_ID) %>% 
-  mutate(Total_Rprts_Filled = n(),
-         Season_Rprts_Filled_2023 = sum(Rprt_Date >= "2023-05-01" & Rprt_Date <= "2023-10-30"),
-         Season_Rprts_Filled_2022 = sum(Rprt_Date >= "2022-05-01" & Rprt_Date <= "2022-10-30"),
-         Season_Rprts_Filled_2021 = sum(Rprt_Date >= "2021-05-01" & Rprt_Date <= "2021-10-30"),
-         Total_Bite_Rprts_Filled = sum(Rprt_Type == "bite"),
-         Total_Adult_Rprts_Filled = sum(Rprt_Type == "adult"),
-         Total_Site_Rprts_Filled = sum(Rprt_Type == "site")) 
-  
+
+### for new experiment that was aiming to see if people who were part of the study filled reports in this year as well.
+#Skip for now
+reports_data_2 <- raw_reports_data %>%
+  dplyr::select(user_id, location_choice, creation_time, type) %>% 
+  rename(User_ID = user_id,
+         Rprt_Date = creation_time,
+         Rprt_Type = type) %>% 
+  filter(User_ID != "" & Rprt_Date >= as.POSIXct("2024-01-01") & Rprt_Date <= as.POSIXct("2024-12-31"))%>% 
+  mutate(Rprt_Type = as.factor(Rprt_Type))
+
+data <- reports_data_2 %>% 
+  filter(User_ID %in% message_data$User_ID)
+
+
+data <- data %>% 
+  group_by(User_ID) %>%
+  arrange(User_ID, Rprt_Date) %>%
+  slice(1L) %>%
+  select(User_ID, Rprt_Date, Rprt_Type) %>% 
+  ungroup() 
+
+
+
+
+
+
+rm(raw_reports_data)

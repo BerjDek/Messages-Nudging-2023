@@ -26,7 +26,7 @@ nrow(raw_user_data %>%
 
 # 54,881 registered users since the cutoff date of 2020-10-02 till the end of 2023. 
 # There is a small difference in the numbers between the unique users here and ones from the reports data set
-#  54,881 here vs 54,853 in reports, even though the data was extracted/requested on the same day probably in the minutes between reports some reporsts were filled.
+#  54,881 here vs 54,853 in reports, even though the data was extracted/requested on the same day probably in the minutes between reports some reports were filled.
 
 #the number from reports csv is going to be used
 
@@ -38,10 +38,10 @@ nrow(raw_user_data %>%
 #   315,015 users in total, this number is going to be used as the pool to attach to the main data set. 
 
 
-## NOTE there is a cutoff at end of 2024, if needs to be removed
+## NOTE there is a cutoff at end of 2023, if needs to be removed
 user_data <- raw_user_data %>%
   filter(Registered_Participation_Date >= as.POSIXct("2020-10-02") & Registered_Participation_Date <= as.POSIXct("2023-12-31"))
 
 
 
-
+rm(raw_user_data)

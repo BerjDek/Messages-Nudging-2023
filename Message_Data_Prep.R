@@ -13,6 +13,7 @@ raw_message_data <- raw_message_data %>%
   group_by(User_ID) %>%
   mutate(Repeat_User = n_distinct(Year) > 1)%>%
   mutate(type = tools::toTitleCase(type)) %>% 
+  mutate(type = recode(type, "Prevention" = "Vigilant", "Promotion" = "Eager"))%>% 
   ungroup() 
 
 #first the data for messages were loaded into a data set called message_data_raw, the notification label was split in order to have 
@@ -67,7 +68,7 @@ message_data <- message_data %>%
       TRUE ~ NA_character_
     )
   ) %>% 
-  mutate(Message_Group = as.factor(Message_Group))
+  mutate(Message_Group = as.factor(Message_Group)) 
 
 
 
@@ -79,7 +80,7 @@ message_data <- message_data %>%
 
 
 
-write.csv(message_data, "CleanMessageData.csv", row.names = FALSE)
+write.csv(message_data, "G:/My Drive/Article about Messages/Messages-Nudging-2023/CleanMessageData.csv", row.names = FALSE)
 
 
 

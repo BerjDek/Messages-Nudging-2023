@@ -97,7 +97,7 @@ survey_data <- survey_data %>%
   select(-Response.ID, -Last.page, -Language, -Consent, -Complt_Survey, -Network, 
          - Other_Citi_Sci, - Security, - Teaching, - Self_Direction, - Stimulation, 
          - Hedonism, - Achievement, - Face, - Conformity, - Benevolence, - Universalism_Social, 
-         - Universalism_Nature, - Routine, - Social_Expansion, - Power, - Help_Science)         #Removed Everything that doesnt have to do with RF
+         - Universalism_Nature, - Routine, - Social_Expansion, - Power, - Help_Science)         #Removed Everything that doesn't have to do with RF
 
 
 
@@ -133,8 +133,8 @@ survey_data <- survey_data %>%
   select(-Prom_1,-Prom_2,-Prom_3,-Prom_4,-Prom_5,-Prev_1,-Prev_2,-Prev_3,-Prev_4,-Prev_5)
 
 
-write.csv(survey_data, "CleanSurveydData.csv", row.names = FALSE)
+write.csv(survey_data, "G:/My Drive/Article about Messages/Messages-Nudging-2023/SurveydData.csv", row.names = FALSE)
 rm(raw_survey_data)
-
+getwd()
 
 summary(survey_data)
